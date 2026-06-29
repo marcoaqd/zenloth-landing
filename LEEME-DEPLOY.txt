@@ -1,0 +1,83 @@
+==========================================================
+  ZENLOTH — LANDING PAGE · INSTRUCCIONES DE PUBLICACION
+==========================================================
+
+Esta carpeta es el sitio web COMPLETO y listo para subir.
+Funciona en computadora, iPad y celular automaticamente.
+
+CONTENIDO:
+  index.html  -> pagina principal (la cinematica con scroll)
+  info.html   -> centro de informacion (lista de espera, seguridad, etc.)
+  404.html    -> pagina de "no encontrado"
+  src/        -> TODAS las imagenes y videos (NO separar de los .html)
+
+----------------------------------------------------------
+REGLA DE ORO
+----------------------------------------------------------
+Subir el CONTENIDO de esta carpeta a la raiz del sitio web,
+de modo que "index.html" quede en la raiz del dominio.
+
+   Correcto:  midominio.com/index.html
+              midominio.com/src/video/...
+   INCORRECTO: midominio.com/Zenloth-Landing-DEPLOY/index.html
+
+La carpeta src/ DEBE quedar al lado de los .html, con su
+estructura intacta. Si se separan, se rompen fotos y videos.
+
+----------------------------------------------------------
+OPCION A — La mas facil (recomendada, gratis): Netlify
+----------------------------------------------------------
+1. Entrar a  https://app.netlify.com/drop
+2. Arrastrar esta carpeta (o el .zip descomprimido) a la pagina.
+3. Listo: queda publicada con un link temporal.
+4. En "Domain settings" conectar el dominio real de Zenloth.
+
+(Cloudflare Pages y Vercel funcionan igual con arrastrar/soltar.)
+
+----------------------------------------------------------
+OPCION B — Hosting tradicional (cPanel / FTP)
+----------------------------------------------------------
+1. Conectarse por FTP o al File Manager del hosting.
+2. Ir a la carpeta raiz del sitio:  public_html  (o www / htdocs).
+3. Subir AHI dentro: index.html, info.html, 404.html y la carpeta src/.
+4. Visitar el dominio: debe cargar la pagina cinematica.
+
+Opcional: en el panel del hosting, configurar 404.html como
+"pagina de error 404" para una experiencia de marca completa.
+
+----------------------------------------------------------
+IMPORTANTE — Requiere internet (normal en cualquier web)
+----------------------------------------------------------
+Las tipografias (Google Fonts) y los iconos (Tabler) se cargan
+desde internet. En un dominio real esto funciona perfecto.
+No hace falta instalar nada.
+
+----------------------------------------------------------
+OPCIONAL — Vista previa al compartir en redes (WhatsApp, etc.)
+----------------------------------------------------------
+Para que al pegar el link en WhatsApp/Facebook/Twitter aparezca
+la imagen de portada, hay que poner la URL real del dominio.
+En "index.html", buscar estas 2 lineas y cambiar la ruta:
+
+   <meta property="og:image" content="src/story/05_walk_black_clean-lg.jpg">
+   <meta name="twitter:image" content="src/story/05_walk_black_clean-lg.jpg">
+
+   por (ejemplo con dominio real):
+   content="https://zenloth.com/src/story/05_walk_black_clean-lg.jpg"
+
+(Si no se hace, la pagina funciona igual; solo la miniatura al
+compartir el link no se vera.)
+
+----------------------------------------------------------
+COMPROBACION FINAL (que todo cargo bien)
+----------------------------------------------------------
+[ ] Abrir el dominio en COMPUTADORA: se ve el video de fondo
+    (persona caminando en la selva) y el scroll va por escenas.
+[ ] Abrir en CELULAR: se ven fotos en vez de video (es a proposito,
+    para ahorrar datos) y todo el contenido se lee bien.
+[ ] Probar los botones del menu y del pie de pagina: llevan a info.html.
+[ ] Escribir una direccion inventada (midominio.com/xyz): aparece 404.
+
+Cualquier duda tecnica, este sitio es 100% estatico (solo archivos),
+no necesita base de datos ni servidor especial.
+==========================================================

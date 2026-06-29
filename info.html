@@ -1,0 +1,392 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Zenloth — Centro de información</title>
+<meta name="description" content="Zenloth: lista de espera, acceso web, seguridad, sobre nosotros y términos. Bienestar financiero con la calma de Costa Rica.">
+<meta name="theme-color" content="#04130C">
+<link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2304130C'/%3E%3Cpath d='M8 23c0-8 6-13 16-14-1 10-7 14-13 14' fill='none' stroke='%2351D984' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M9 22c3-4 8-6 12-7' fill='none' stroke='%2351D984' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
+<!-- Tipografía de marca (brandbook): Space Grotesk para títulos · Manrope para cuerpo (solo pesos usados) -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap">
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@3.4.0/dist/tabler-icons.min.css">
+<style>
+*,*::before,*::after{margin:0;padding:0;box-sizing:border-box}
+button,input,select,textarea{font-family:inherit;font-size:inherit;line-height:inherit}
+:root{
+  --esm:#51D984; --esm-deep:#36b46a; --selva:#065F46; --teal:#0F766E;
+  --amber:#F6A738; --amber-soft:rgba(246,167,56,.14); --amber-bd:rgba(246,167,56,.36);
+  --bg:#04130C; --bg2:#071d12; --surf:#0c2418; --surf2:#0f2c1c;
+  --ink:#F1F7F3; --mut:#9DB3A8; --mut-2:#B7C9BF; --bd:rgba(255,255,255,.1);
+  --ease:cubic-bezier(.16,1,.3,1);
+}
+html{scroll-behavior:smooth;scroll-padding-top:96px;-webkit-text-size-adjust:100%}
+body{background:radial-gradient(120% 80% at 80% -10%,rgba(15,118,110,.18),transparent 60%),var(--bg);color:var(--ink);font-family:'Manrope',system-ui,sans-serif;line-height:1.65;overflow-x:hidden;-webkit-font-smoothing:antialiased;min-height:100vh}
+h1,h2,h3,.disp{font-family:'Space Grotesk','Manrope',sans-serif;letter-spacing:-1px;line-height:1.06}
+em{font-style:normal;color:var(--esm)}
+img{max-width:100%;display:block}
+a{color:inherit}
+*:focus-visible{outline:2.5px solid var(--esm);outline-offset:3px;border-radius:4px}
+:focus:not(:focus-visible){outline:none}
+.eyebrow{color:var(--esm);font-weight:700;letter-spacing:3px;text-transform:uppercase;font-size:12px}
+.page{max-width:1180px;margin:0 auto;padding:0 clamp(20px,4vw,32px);position:relative;z-index:2}
+
+/* grano de película global (igual que la landing) */
+.grain{position:fixed;inset:0;z-index:90;pointer-events:none;opacity:.045;mix-blend-mode:overlay;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.85' numOctaves='2'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E")}
+
+/* ——— botones ——— */
+.btn{font-family:'Manrope';font-weight:600;font-size:15px;border-radius:999px;padding:14px 28px;cursor:pointer;border:none;transition:.25s var(--ease);display:inline-flex;align-items:center;gap:8px;text-decoration:none;white-space:nowrap}
+.btn-esm{background:var(--esm);color:#04240f}.btn-esm:hover{transform:translateY(-2px);box-shadow:0 14px 38px rgba(81,217,132,.45)}
+.btn-ghost{background:rgba(255,255,255,.06);color:#fff;border:1.5px solid rgba(255,255,255,.45);backdrop-filter:blur(8px)}.btn-ghost:hover{background:rgba(255,255,255,.16)}
+.lang{background:rgba(255,255,255,.08);border:1px solid var(--bd);color:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
+.lang:hover{background:rgba(255,255,255,.18)}
+
+/* ——— nav ——— */
+nav{position:fixed;top:0;left:0;right:0;z-index:60;display:flex;align-items:center;justify-content:space-between;gap:14px;padding:16px clamp(20px,4vw,32px);background:rgba(4,19,12,.72);backdrop-filter:blur(14px);border-bottom:1px solid var(--bd)}
+nav .logo{height:28px}
+nav .navr{display:flex;align-items:center;gap:14px}
+.back{display:inline-flex;align-items:center;gap:7px;color:var(--mut);font-weight:600;font-size:14px;text-decoration:none;transition:.2s}
+.back:hover{color:var(--esm)}
+
+/* ——— hero de la página ——— */
+.dochero{padding:128px 0 26px;max-width:760px}
+.dochero h1{font-size:clamp(2.3rem,1rem+5vw,4rem);font-weight:700;margin:16px 0 14px}
+.dochero p{color:var(--mut);font-size:18px;max-width:60ch}
+
+/* ——— layout TOC + contenido ——— */
+.doclayout{display:grid;grid-template-columns:240px 1fr;gap:clamp(28px,4vw,56px);padding:30px 0 96px}
+.toc{position:sticky;top:96px;align-self:start;border-left:1px solid var(--bd);padding-left:4px}
+.toc a{display:flex;align-items:center;gap:10px;color:var(--mut);text-decoration:none;font-size:14px;font-weight:500;padding:9px 12px;border-left:2px solid transparent;margin-left:-5px;transition:.2s}
+.toc a i{font-size:17px;opacity:.8}
+.toc a:hover{color:var(--ink)}
+.toc a.on{color:var(--esm);border-left-color:var(--esm)}
+.doc{min-width:0}
+
+/* ——— bloques de contenido ——— */
+.block{scroll-margin-top:96px;padding:40px 0;border-top:1px solid var(--bd)}
+.block:first-of-type{border-top:none;padding-top:8px}
+.block .bh{display:flex;align-items:center;gap:13px;margin-bottom:18px}
+.block .bh .bi{width:46px;height:46px;border-radius:13px;background:rgba(81,217,132,.13);color:var(--esm);display:flex;align-items:center;justify-content:center;font-size:23px;flex:none}
+.block h2{font-size:clamp(1.6rem,1rem+2vw,2.3rem);font-weight:700}
+.block p{color:var(--mut);font-size:16px;margin:0 0 14px;max-width:68ch}
+.block p strong{color:var(--ink);font-weight:600}
+.block ul{list-style:none;margin:6px 0 16px;max-width:68ch}
+.block ul li{position:relative;padding:8px 0 8px 28px;color:var(--mut);font-size:15.5px}
+.block ul li::before{content:'';position:absolute;left:2px;top:15px;width:8px;height:8px;border-radius:50%;background:var(--esm)}
+.block ul li strong{color:var(--ink);font-weight:600}
+.block h3{font-size:18px;font-weight:600;color:var(--ink);margin:18px 0 8px}
+
+/* tarjeta destacada (lista de espera) */
+.feature-card{background:linear-gradient(160deg,var(--surf2),var(--surf));border:1px solid rgba(81,217,132,.28);border-radius:24px;padding:clamp(26px,4vw,40px);position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
+.feature-card::after{content:'';position:absolute;inset:0;border-radius:24px;background:linear-gradient(105deg,transparent 40%,rgba(81,217,132,.08) 50%,transparent 60%);background-size:200% 100%;animation:shimmer 5s linear infinite;pointer-events:none}
+@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
+.feature-card .pill{display:inline-flex;align-items:center;gap:7px;background:rgba(81,217,132,.14);border:1px solid rgba(81,217,132,.32);color:var(--esm);font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;margin-bottom:16px}
+.wlform{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:2}
+.wlform input{flex:1;min-width:220px;background:rgba(0,0,0,.25);border:1px solid var(--bd);border-radius:999px;padding:14px 20px;color:var(--ink);font-size:15px;outline:none;transition:.2s}
+.wlform input:focus{border-color:var(--esm);box-shadow:0 0 0 3px rgba(81,217,132,.18)}
+.wlform input::placeholder{color:var(--mut)}
+.wlnote{color:var(--mut);font-size:13px;margin-top:14px;position:relative;z-index:2}
+.wlok{display:none;align-items:center;gap:10px;margin-top:22px;color:var(--esm);font-weight:600;font-size:16px;position:relative;z-index:2}
+.wlok.show{display:flex}
+.wlok i{font-size:24px}
+
+/* mini-cards (blog / contacto) */
+.mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:10px}
+.mini{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px;transition:.25s var(--ease);text-decoration:none;display:block}
+.mini:hover{transform:translateY(-4px);border-color:rgba(81,217,132,.4);background:var(--surf2)}
+.mini .tag{color:var(--esm);font-size:11px;font-weight:700;letter-spacing:1.5px;text-transform:uppercase}
+.mini h3{font-size:16.5px;margin:9px 0 7px;color:var(--ink)}
+.mini p{font-size:13.5px;color:var(--mut);margin:0;max-width:none}
+.contact-row{display:flex;align-items:center;gap:13px;background:var(--surf);border:1px solid var(--bd);border-radius:14px;padding:15px 18px;margin-bottom:10px;text-decoration:none;transition:.2s}
+.contact-row:hover{border-color:rgba(81,217,132,.4)}
+.contact-row i{color:var(--esm);font-size:22px}
+.contact-row .ct b{color:var(--ink);font-weight:600;display:block;font-size:15px}
+.contact-row .ct span{color:var(--mut);font-size:13.5px}
+
+/* aviso borrador para legales */
+.draftnote{display:inline-flex;align-items:center;gap:8px;background:rgba(245,158,11,.12);border:1px solid rgba(245,158,11,.32);color:#f7c46c;font-size:12.5px;font-weight:600;padding:7px 13px;border-radius:999px;margin-bottom:16px}
+.legal-meta{color:var(--mut);font-size:13px;font-style:italic;margin-top:6px}
+
+/* ——— footer (igual que landing) ——— */
+footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;position:relative;z-index:2}
+.fgrid{display:grid;grid-template-columns:1.6fr 1fr 1fr 1fr;gap:40px;margin-bottom:44px}
+.fgrid .logo{height:30px;margin-bottom:15px}
+.fabout{color:var(--mut);font-size:14px;max-width:30ch}
+.fcol h4{font-size:13px;text-transform:uppercase;letter-spacing:1.5px;color:var(--mut);margin-bottom:15px;font-weight:600}
+.fcol a{display:block;color:rgba(255,255,255,.78);text-decoration:none;font-size:14.5px;margin-bottom:11px;cursor:pointer;transition:.2s}
+.fcol a:hover{color:var(--esm)}
+.fbottom{display:flex;justify-content:space-between;align-items:center;border-top:1px solid var(--bd);padding-top:22px;color:var(--mut);font-size:13.5px;flex-wrap:wrap;gap:12px}
+
+@media(max-width:860px){
+  .doclayout{grid-template-columns:1fr;gap:0}
+  .toc{position:static;border-left:none;border-bottom:1px solid var(--bd);display:flex;flex-wrap:wrap;gap:4px;padding:0 0 18px;margin-bottom:10px}
+  .toc a{border-left:none;border-bottom:2px solid transparent;margin-left:0;padding:8px 11px}
+  .toc a.on{border-left:none;border-bottom-color:var(--esm)}
+  .fgrid{grid-template-columns:1fr 1fr}
+}
+@media(max-width:560px){.fgrid{grid-template-columns:1fr}}
+@media(prefers-reduced-motion:reduce){*{animation:none!important;scroll-behavior:auto!important}}
+
+/* ——— banner de cookies (igual que la landing) ——— */
+.cookiebar{position:fixed;left:50%;transform:translateX(-50%);bottom:18px;z-index:95;width:min(720px,calc(100% - 28px));background:rgba(7,29,18,.93);border:1px solid var(--bd);border-radius:18px;padding:15px 20px;backdrop-filter:blur(16px);box-shadow:0 24px 60px rgba(0,0,0,.5);display:flex;align-items:center;gap:18px;flex-wrap:wrap;transition:.45s var(--ease)}
+.cookiebar.hide{opacity:0;transform:translateX(-50%) translateY(22px);pointer-events:none}
+.cookietext{display:flex;align-items:flex-start;gap:11px;color:var(--mut-2);font-size:13px;line-height:1.5;flex:1;min-width:240px}
+.cookietext i{color:var(--esm);font-size:20px;flex:none;margin-top:1px}
+.cookiebtns{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
+.btn-ck{font-family:'Manrope';font-weight:600;font-size:13px;border-radius:999px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);transition:.2s}
+.btn-ck.ghost{background:transparent;color:var(--ink)}.btn-ck.ghost:hover{background:rgba(255,255,255,.08)}
+.btn-ck.ok{background:var(--esm);color:#04240f;border-color:transparent}.btn-ck.ok:hover{transform:translateY(-1px)}
+.cklink{color:var(--mut);font-size:12.5px;text-decoration:underline;text-underline-offset:3px;white-space:nowrap}
+@media(max-width:560px){.cookiebar{flex-direction:column;align-items:stretch}.cookiebtns{justify-content:flex-end}}
+</style>
+</head>
+<body>
+<div class="grain"></div>
+
+<!-- ═══════════════ NAV ═══════════════ -->
+<nav>
+  <a href="index.html"><img class="logo" src="src/logo/zenloth-lockup-white.png" alt="Zenloth"></a>
+  <div class="navr">
+    <a class="back" href="index.html"><i class="ti ti-arrow-left"></i><span data-es="Volver al inicio" data-en="Back to home">Volver al inicio</span></a>
+    <button class="lang" id="lang">EN</button>
+  </div>
+</nav>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<div class="page">
+  <header class="dochero">
+    <span class="eyebrow" data-es="Centro de información" data-en="Info center">Centro de información</span>
+    <h1 data-es="Todo sobre <em>Zenloth</em>" data-en="Everything about <em>Zenloth</em>">Todo sobre <em>Zenloth</em></h1>
+    <p data-es="Quiénes somos, cómo cuidamos tu dinero y cómo sumarte antes de que abramos. Bienestar financiero con la calma de Costa Rica." data-en="Who we are, how we protect your money, and how to join before we open. Financial wellness with the calm of Costa Rica.">Quiénes somos, cómo cuidamos tu dinero y cómo sumarte antes de que abramos. Bienestar financiero con la calma de Costa Rica.</p>
+  </header>
+
+  <div class="doclayout">
+    <!-- ——— TOC ——— -->
+    <aside class="toc" id="toc">
+      <a href="#lista-de-espera"><i class="ti ti-clock-hour-4"></i><span data-es="Lista de espera" data-en="Waitlist">Lista de espera</span></a>
+      <a href="#acceso-web"><i class="ti ti-world"></i><span data-es="Acceso web" data-en="Web app">Acceso web</span></a>
+      <a href="#seguridad"><i class="ti ti-lock"></i><span data-es="Seguridad" data-en="Security">Seguridad</span></a>
+      <a href="#sobre-nosotros"><i class="ti ti-leaf"></i><span data-es="Sobre nosotros" data-en="About">Sobre nosotros</span></a>
+      <a href="#comunidad"><i class="ti ti-users"></i><span data-es="Comunidad" data-en="Community">Comunidad</span></a>
+      <a href="#blog"><i class="ti ti-news"></i><span>Blog</span></a>
+      <a href="#contacto"><i class="ti ti-mail"></i><span data-es="Contacto" data-en="Contact">Contacto</span></a>
+      <a href="#terminos"><i class="ti ti-file-text"></i><span data-es="Términos" data-en="Terms">Términos</span></a>
+      <a href="#privacidad"><i class="ti ti-shield-lock"></i><span data-es="Privacidad" data-en="Privacy">Privacidad</span></a>
+      <a href="#cookies"><i class="ti ti-cookie"></i><span>Cookies</span></a>
+    </aside>
+
+    <!-- ——— CONTENIDO ——— -->
+    <main class="doc">
+
+      <!-- LISTA DE ESPERA -->
+      <section class="block" id="lista-de-espera">
+        <div class="feature-card">
+          <span class="pill"><i class="ti ti-clock-hour-4"></i><span data-es="Estamos en pre-lanzamiento" data-en="We are in pre-launch">Estamos en pre-lanzamiento</span></span>
+          <h2 data-es="Sumate a la <em>lista de espera</em>" data-en="Join the <em>waitlist</em>">Sumate a la <em>lista de espera</em></h2>
+          <p data-es="Todavía no abrimos al público. Estamos afinando cada detalle para que tu primera experiencia con Zenloth sea impecable. Dejanos tu correo y serás de los primeros en entrar — con tu <strong>primer mes gratis garantizado</strong>." data-en="We are not open to the public yet. We are polishing every detail so your first experience with Zenloth is flawless. Leave your email and you will be among the first in — with your <strong>first month free guaranteed</strong>.">Todavía no abrimos al público. Estamos afinando cada detalle para que tu primera experiencia con Zenloth sea impecable. Dejanos tu correo y serás de los primeros en entrar — con tu <strong>primer mes gratis garantizado</strong>.</p>
+          <form class="wlform" id="wlform" novalidate>
+            <input type="email" id="wlemail" required placeholder="tucorreo@ejemplo.com" data-es-ph="tucorreo@ejemplo.com" data-en-ph="you@example.com" aria-label="Email">
+            <button type="submit" class="btn btn-esm"><span data-es="Sumarme" data-en="Join in">Sumarme</span><i class="ti ti-arrow-right"></i></button>
+          </form>
+          <div class="wlnote" data-es="Sin spam y sin compromiso — solo te escribimos cuando abramos." data-en="No spam, no commitment — we only write when we open.">Sin spam y sin compromiso — solo te escribimos cuando abramos.</div>
+          <div class="wlok" id="wlok"><i class="ti ti-circle-check"></i><span data-es="¡Listo! Te apartamos un lugar. Te avisaremos apenas abramos. 🌿" data-en="Done! We saved you a spot. We will let you know as soon as we open. 🌿">¡Listo! Te apartamos un lugar. Te avisaremos apenas abramos. 🌿</span></div>
+        </div>
+      </section>
+
+      <!-- ACCESO WEB -->
+      <section class="block" id="acceso-web">
+        <div class="bh"><div class="bi"><i class="ti ti-world"></i></div><h2 data-es="Acceso web" data-en="Web app">Acceso web</h2></div>
+        <p data-es="Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Cuando lancemos, entrás desde cualquier navegador con tu cuenta y tus datos siempre sincronizados." data-en="Zenloth is a <strong>web app</strong>. You don't need to download anything from the App Store or Google Play. When we launch, you sign in from any browser with your account and your data always in sync.">Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Cuando lancemos, entrás desde cualquier navegador con tu cuenta y tus datos siempre sincronizados.</p>
+        <ul>
+          <li><strong data-es="En cualquier dispositivo:" data-en="On any device:">En cualquier dispositivo:</strong> <span data-es="teléfono, tablet o computadora, con la misma experiencia." data-en="phone, tablet or computer, same experience.">teléfono, tablet o computadora, con la misma experiencia.</span></li>
+          <li><strong data-es="Como app nativa:" data-en="Like a native app:">Como app nativa:</strong> <span data-es="agregala a tu pantalla de inicio (PWA) y se abre a pantalla completa." data-en="add it to your home screen (PWA) and it opens full-screen.">agregala a tu pantalla de inicio (PWA) y se abre a pantalla completa.</span></li>
+          <li><strong data-es="Sin actualizaciones manuales:" data-en="No manual updates:">Sin actualizaciones manuales:</strong> <span data-es="siempre tenés la última versión, al instante." data-en="you always have the latest version, instantly.">siempre tenés la última versión, al instante.</span></li>
+        </ul>
+        <p data-es="¿Por qué web y no las tiendas? Para movernos rápido, llegar a todos por igual y no cobrarte comisiones de tienda. Tu dinero merece foco, no fricción." data-en="Why web and not the stores? To move fast, reach everyone equally, and skip store fees. Your money deserves focus, not friction.">¿Por qué web y no las tiendas? Para movernos rápido, llegar a todos por igual y no cobrarte comisiones de tienda. Tu dinero merece foco, no fricción.</p>
+      </section>
+
+      <!-- SEGURIDAD -->
+      <section class="block" id="seguridad">
+        <div class="bh"><div class="bi"><i class="ti ti-lock"></i></div><h2 data-es="Seguridad" data-en="Security">Seguridad</h2></div>
+        <p data-es="Tu información financiera es de las cosas más sensibles que existen. La tratamos como tal, desde el primer día." data-en="Your financial information is among the most sensitive there is. We treat it that way, from day one.">Tu información financiera es de las cosas más sensibles que existen. La tratamos como tal, desde el primer día.</p>
+        <ul>
+          <li><strong data-es="Ciframos tu información" data-en="We encrypt your data">Ciframos tu información</strong> <span data-es="en reposo y en tránsito." data-en="at rest and in transit.">en reposo y en tránsito.</span></li>
+          <li><strong data-es="Datos alojados en Costa Rica" data-en="Data hosted in Costa Rica">Datos alojados en Costa Rica</strong><span data-es=", bajo normativa local." data-en=", under local regulation.">, bajo normativa local.</span></li>
+          <li><strong data-es="Nunca vendemos tus datos." data-en="We never sell your data.">Nunca vendemos tus datos.</strong> <span data-es="Nuestro negocio es tu suscripción, no tu información." data-en="Our business is your subscription, not your information.">Nuestro negocio es tu suscripción, no tu información.</span></li>
+          <li><strong data-es="Vos mandás:" data-en="You're in control:">Vos mandás:</strong> <span data-es="podés exportar o borrar toda tu información cuando querás." data-en="export or delete all your information anytime.">podés exportar o borrar toda tu información cuando querás.</span></li>
+        </ul>
+        <p data-es="Si encontrás algo que deberíamos revisar, escribinos a seguridad@zenloth.com. Respondemos en serio." data-en="If you find something we should review, write to security@zenloth.com. We take it seriously.">Si encontrás algo que deberíamos revisar, escribinos a seguridad@zenloth.com. Respondemos en serio.</p>
+      </section>
+
+      <!-- SOBRE NOSOTROS -->
+      <section class="block" id="sobre-nosotros">
+        <div class="bh"><div class="bi"><i class="ti ti-leaf"></i></div><h2 data-es="Sobre nosotros" data-en="About us">Sobre nosotros</h2></div>
+        <p data-es="Zenloth nació en Costa Rica con una idea simple: las finanzas personales no deberían generar ansiedad. Tomamos la calma de la selva tropical y la convertimos en una herramienta que te muestra <strong>dónde estás, hacia dónde vas y tu siguiente paso</strong>." data-en="Zenloth was born in Costa Rica with a simple idea: personal finance shouldn't cause anxiety. We took the calm of the rainforest and turned it into a tool that shows you <strong>where you are, where you're going, and your next step</strong>.">Zenloth nació en Costa Rica con una idea simple: las finanzas personales no deberían generar ansiedad. Tomamos la calma de la selva tropical y la convertimos en una herramienta que te muestra <strong>dónde estás, hacia dónde vas y tu siguiente paso</strong>.</p>
+        <p data-es="Zenny, nuestro perezoso guía, es el recordatorio de que avanzar despacio también es avanzar. Sin culpa, sin números que asustan: claridad para que tomes mejores decisiones a tu ritmo." data-en="Zenny, our sloth guide, is the reminder that moving slowly is still moving forward. No guilt, no scary numbers: clarity so you make better decisions at your own pace.">Zenny, nuestro perezoso guía, es el recordatorio de que avanzar despacio también es avanzar. Sin culpa, sin números que asustan: claridad para que tomes mejores decisiones a tu ritmo.</p>
+        <h3 data-es="En qué creemos" data-en="What we believe">En qué creemos</h3>
+        <ul>
+          <li><span data-es="Calma sobre alarma. Te avisamos antes, no después." data-en="Calm over alarm. We warn you before, not after.">Calma sobre alarma. Te avisamos antes, no después.</span></li>
+          <li><span data-es="Hecho para Costa Rica: colones y dólares, juntos y sin enredos." data-en="Built for Costa Rica: colones and dollars, together and tidy.">Hecho para Costa Rica: colones y dólares, juntos y sin enredos.</span></li>
+          <li><span data-es="Tus datos son tuyos. Punto." data-en="Your data is yours. Period.">Tus datos son tuyos. Punto.</span></li>
+        </ul>
+      </section>
+
+      <!-- COMUNIDAD -->
+      <section class="block" id="comunidad">
+        <div class="bh"><div class="bi"><i class="ti ti-users"></i></div><h2 data-es="Comunidad" data-en="Community">Comunidad</h2></div>
+        <p data-es="Estamos construyendo Zenloth junto a nuestra comunidad de pre-lanzamiento. Compartimos avances, escuchamos ideas y probamos funciones con quienes están en la lista de espera antes que nadie." data-en="We're building Zenloth alongside our pre-launch community. We share progress, listen to ideas, and test features with waitlist members before anyone else.">Estamos construyendo Zenloth junto a nuestra comunidad de pre-lanzamiento. Compartimos avances, escuchamos ideas y probamos funciones con quienes están en la lista de espera antes que nadie.</p>
+        <div class="mini-grid">
+          <a class="mini" href="#lista-de-espera"><div class="tag" data-es="Acceso anticipado" data-en="Early access">Acceso anticipado</div><h3 data-es="Probá antes que nadie" data-en="Try it first">Probá antes que nadie</h3><p data-es="Los primeros de la lista entran a las pruebas privadas." data-en="The first on the list join private testing.">Los primeros de la lista entran a las pruebas privadas.</p></a>
+          <a class="mini" href="#contacto"><div class="tag" data-es="Tu voz" data-en="Your voice">Tu voz</div><h3 data-es="Dale forma al producto" data-en="Shape the product">Dale forma al producto</h3><p data-es="Tus ideas se vuelven funciones reales. Contános qué necesitás." data-en="Your ideas become real features. Tell us what you need.">Tus ideas se vuelven funciones reales. Contános qué necesitás.</p></a>
+          <a class="mini" href="#blog"><div class="tag">Newsletter</div><h3 data-es="Calma financiera, al correo" data-en="Financial calm, by email">Calma financiera, al correo</h3><p data-es="Consejos cortos sobre dinero, sin ansiedad ni jerga." data-en="Short money tips, no anxiety, no jargon.">Consejos cortos sobre dinero, sin ansiedad ni jerga.</p></a>
+        </div>
+      </section>
+
+      <!-- BLOG -->
+      <section class="block" id="blog">
+        <div class="bh"><div class="bi"><i class="ti ti-news"></i></div><h2>Blog</h2></div>
+        <p data-es="Ideas sobre dinero a la velocidad de un perezoso: claras, honestas y sin culpa. (Próximamente — esto es contenido de ejemplo.)" data-en="Money ideas at sloth speed: clear, honest, guilt-free. (Coming soon — this is sample content.)">Ideas sobre dinero a la velocidad de un perezoso: claras, honestas y sin culpa. (Próximamente — esto es contenido de ejemplo.)</p>
+        <div class="mini-grid">
+          <a class="mini" href="#blog"><div class="tag" data-es="Presupuesto" data-en="Budgeting">Presupuesto</div><h3 data-es="Colones y dólares sin enloquecer" data-en="Colones and dollars without the headache">Colones y dólares sin enloquecer</h3><p data-es="Cómo manejar dos monedas en un mismo presupuesto." data-en="How to manage two currencies in one budget.">Cómo manejar dos monedas en un mismo presupuesto.</p></a>
+          <a class="mini" href="#blog"><div class="tag" data-es="Mentalidad" data-en="Mindset">Mentalidad</div><h3 data-es="El método del perezoso" data-en="The sloth method">El método del perezoso</h3><p data-es="Finanzas sin ansiedad: avanzar despacio también es avanzar." data-en="Finance without anxiety: slow progress is still progress.">Finanzas sin ansiedad: avanzar despacio también es avanzar.</p></a>
+          <a class="mini" href="#acceso-web"><div class="tag" data-es="Producto" data-en="Product">Producto</div><h3 data-es="Por qué somos web y no app de tienda" data-en="Why we're web, not a store app">Por qué somos web y no app de tienda</h3><p data-es="La decisión detrás de construir Zenloth como web app." data-en="The thinking behind building Zenloth as a web app.">La decisión detrás de construir Zenloth como web app.</p></a>
+        </div>
+      </section>
+
+      <!-- CONTACTO -->
+      <section class="block" id="contacto">
+        <div class="bh"><div class="bi"><i class="ti ti-mail"></i></div><h2 data-es="Contacto" data-en="Contact">Contacto</h2></div>
+        <p data-es="¿Dudas, ideas o ganas de saludar? Estamos en Costa Rica y respondemos en menos de 24 horas hábiles." data-en="Questions, ideas, or just want to say hi? We're in Costa Rica and reply within 24 business hours.">¿Dudas, ideas o ganas de saludar? Estamos en Costa Rica y respondemos en menos de 24 horas hábiles.</p>
+        <a class="contact-row" href="mailto:hola@zenloth.com"><i class="ti ti-mail"></i><div class="ct"><b>hola@zenloth.com</b><span data-es="Consultas generales" data-en="General questions">Consultas generales</span></div></a>
+        <a class="contact-row" href="mailto:soporte@zenloth.com"><i class="ti ti-lifebuoy"></i><div class="ct"><b>soporte@zenloth.com</b><span data-es="Ayuda y soporte" data-en="Help and support">Ayuda y soporte</span></div></a>
+        <a class="contact-row" href="mailto:prensa@zenloth.com"><i class="ti ti-microphone-2"></i><div class="ct"><b>prensa@zenloth.com</b><span data-es="Prensa y alianzas" data-en="Press and partnerships">Prensa y alianzas</span></div></a>
+      </section>
+
+      <!-- TERMINOS -->
+      <section class="block" id="terminos">
+        <div class="bh"><div class="bi"><i class="ti ti-file-text"></i></div><h2 data-es="Términos del servicio" data-en="Terms of service">Términos del servicio</h2></div>
+        <span class="draftnote"><i class="ti ti-alert-triangle"></i><span data-es="Borrador · contenido de ejemplo, no es asesoría legal" data-en="Draft · sample content, not legal advice">Borrador · contenido de ejemplo, no es asesoría legal</span></span>
+        <p data-es="Al usar Zenloth aceptás estos términos. Zenloth es una herramienta de organización financiera personal; no somos un banco ni damos asesoría de inversión." data-en="By using Zenloth you accept these terms. Zenloth is a personal finance organization tool; we are not a bank and we do not give investment advice.">Al usar Zenloth aceptás estos términos. Zenloth es una herramienta de organización financiera personal; no somos un banco ni damos asesoría de inversión.</p>
+        <ul>
+          <li><strong data-es="Tu cuenta:" data-en="Your account:">Tu cuenta:</strong> <span data-es="sos responsable de mantener tus credenciales seguras." data-en="you are responsible for keeping your credentials safe.">sos responsable de mantener tus credenciales seguras.</span></li>
+          <li><strong data-es="Suscripción:" data-en="Subscription:">Suscripción:</strong> <span data-es="el primer mes es gratis; luego se cobra según el plan elegido. Cancelás cuando querás." data-en="the first month is free; then billing follows the chosen plan. Cancel anytime.">el primer mes es gratis; luego se cobra según el plan elegido. Cancelás cuando querás.</span></li>
+          <li><strong data-es="Uso aceptable:" data-en="Acceptable use:">Uso aceptable:</strong> <span data-es="no usés el servicio para actividades ilícitas." data-en="don't use the service for unlawful activity.">no usés el servicio para actividades ilícitas.</span></li>
+        </ul>
+        <p class="legal-meta" data-es="Última actualización: junio 2026. Reemplazá este texto por tus términos legales definitivos antes del lanzamiento." data-en="Last updated: June 2026. Replace this text with your final legal terms before launch.">Última actualización: junio 2026. Reemplazá este texto por tus términos legales definitivos antes del lanzamiento.</p>
+      </section>
+
+      <!-- PRIVACIDAD -->
+      <section class="block" id="privacidad">
+        <div class="bh"><div class="bi"><i class="ti ti-shield-lock"></i></div><h2 data-es="Privacidad" data-en="Privacy">Privacidad</h2></div>
+        <span class="draftnote"><i class="ti ti-alert-triangle"></i><span data-es="Borrador · contenido de ejemplo, no es asesoría legal" data-en="Draft · sample content, not legal advice">Borrador · contenido de ejemplo, no es asesoría legal</span></span>
+        <p data-es="Recopilamos solo lo necesario para que Zenloth funcione: tu correo, tus cuentas y movimientos que vos conectás, y datos básicos de uso para mejorar la app." data-en="We collect only what's needed for Zenloth to work: your email, the accounts and transactions you connect, and basic usage data to improve the app.">Recopilamos solo lo necesario para que Zenloth funcione: tu correo, tus cuentas y movimientos que vos conectás, y datos básicos de uso para mejorar la app.</p>
+        <ul>
+          <li><strong data-es="Nunca vendemos tus datos." data-en="We never sell your data.">Nunca vendemos tus datos.</strong> <span data-es="Ni los compartimos con anunciantes." data-en="Nor share them with advertisers.">Ni los compartimos con anunciantes.</span></li>
+          <li><strong data-es="Control total:" data-en="Full control:">Control total:</strong> <span data-es="podés descargar o eliminar tu información cuando lo decidas." data-en="download or delete your information whenever you decide.">podés descargar o eliminar tu información cuando lo decidas.</span></li>
+          <li><strong data-es="Alojamiento en Costa Rica" data-en="Hosted in Costa Rica">Alojamiento en Costa Rica</strong><span data-es=" con tus datos cifrados." data-en=" with your data encrypted."> con tus datos cifrados.</span></li>
+        </ul>
+        <p class="legal-meta" data-es="Para ejercer tus derechos sobre tus datos: privacidad@zenloth.com." data-en="To exercise your data rights: privacy@zenloth.com.">Para ejercer tus derechos sobre tus datos: privacidad@zenloth.com.</p>
+      </section>
+
+      <!-- COOKIES -->
+      <section class="block" id="cookies">
+        <div class="bh"><div class="bi"><i class="ti ti-cookie"></i></div><h2>Cookies</h2></div>
+        <span class="draftnote"><i class="ti ti-alert-triangle"></i><span data-es="Borrador · contenido de ejemplo" data-en="Draft · sample content">Borrador · contenido de ejemplo</span></span>
+        <p data-es="Usamos cookies esenciales para mantener tu sesión y un mínimo de analítica para entender cómo mejorar. Nada de rastreo publicitario." data-en="We use essential cookies to keep your session and minimal analytics to understand how to improve. No advertising tracking.">Usamos cookies esenciales para mantener tu sesión y un mínimo de analítica para entender cómo mejorar. Nada de rastreo publicitario.</p>
+        <ul>
+          <li><strong data-es="Esenciales:" data-en="Essential:">Esenciales:</strong> <span data-es="necesarias para iniciar sesión y recordar tus preferencias (como el idioma)." data-en="needed to sign in and remember your preferences (like language).">necesarias para iniciar sesión y recordar tus preferencias (como el idioma).</span></li>
+          <li><strong data-es="Analítica:" data-en="Analytics:">Analítica:</strong> <span data-es="anónima y agregada, para mejorar el producto." data-en="anonymous and aggregated, to improve the product.">anónima y agregada, para mejorar el producto.</span></li>
+        </ul>
+      </section>
+
+    </main>
+  </div>
+</div>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="page">
+    <div class="fgrid">
+      <div>
+        <img class="logo" src="src/logo/zenloth-lockup-white.png" alt="Zenloth">
+        <p class="fabout" data-es="Bienestar financiero con la calma de Costa Rica. Hecho para tu ritmo." data-en="Financial wellness with the calm of Costa Rica. Made for your pace.">Bienestar financiero con la calma de Costa Rica. Hecho para tu ritmo.</p>
+      </div>
+      <div class="fcol"><h4 data-es="Producto" data-en="Product">Producto</h4><a href="index.html#features" data-es="Funciones" data-en="Features">Funciones</a><a href="index.html#pricing" data-es="Precios" data-en="Pricing">Precios</a><a href="#seguridad" data-es="Seguridad" data-en="Security">Seguridad</a><a href="#acceso-web" data-es="Acceso web" data-en="Web app">Acceso web</a></div>
+      <div class="fcol"><h4 data-es="Compañía" data-en="Company">Compañía</h4><a href="#sobre-nosotros" data-es="Sobre nosotros" data-en="About">Sobre nosotros</a><a href="#comunidad" data-es="Comunidad" data-en="Community">Comunidad</a><a href="#blog">Blog</a><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></div>
+      <div class="fcol"><h4>Legal</h4><a href="#terminos" data-es="Términos" data-en="Terms">Términos</a><a href="#privacidad" data-es="Privacidad" data-en="Privacy">Privacidad</a><a href="#cookies">Cookies</a></div>
+    </div>
+    <div class="fbottom">
+      <div>© 2026 Zenloth · <span data-es="Hecho con" data-en="Made with">Hecho con</span> 🌿 <span data-es="en Costa Rica" data-en="in Costa Rica">en Costa Rica</span></div>
+      <button class="lang" id="lang2">EN</button>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══════════════ COOKIES ═══════════════ -->
+<div class="cookiebar hide" id="cookiebar" role="dialog" aria-label="Cookies">
+  <div class="cookietext"><i class="ti ti-cookie"></i><span data-es="Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario." data-en="We use essential cookies to run the site and, only if you accept, minimal anonymous analytics to improve. No ad tracking.">Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario.</span></div>
+  <div class="cookiebtns">
+    <button class="btn-ck ghost" id="ckEss" data-es="Solo esenciales" data-en="Essentials only">Solo esenciales</button>
+    <button class="btn-ck ok" id="ckAll" data-es="Aceptar todo" data-en="Accept all">Aceptar todo</button>
+    <a class="cklink" href="#cookies" data-es="Más info" data-en="Learn more">Más info</a>
+  </div>
+</div>
+
+<script>
+/* ——— idioma ES/EN (mismo sistema que la landing, con persistencia) ——— */
+const T={es:'EN',en:'ES'};
+let lang=(()=>{try{return localStorage.getItem('zl_lang')||'es'}catch(e){return 'es'}})();
+function setLang(l){
+  lang=l;document.documentElement.lang=l;try{localStorage.setItem('zl_lang',l)}catch(e){}
+  document.querySelectorAll('[data-es]').forEach(n=>{const v=n.getAttribute('data-'+l);if(v!=null)n.innerHTML=v});
+  document.querySelectorAll('[data-es-ph]').forEach(n=>{const v=n.getAttribute('data-'+l+'-ph');if(v!=null)n.placeholder=v});
+  ['lang','lang2'].forEach(id=>{const b=document.getElementById(id);if(b)b.textContent=T[l]});
+}
+['lang','lang2'].forEach(id=>{const b=document.getElementById(id);if(b)b.addEventListener('click',()=>setLang(lang==='es'?'en':'es'))});
+setLang(lang);
+
+/* ——— TOC: resalta la sección visible ——— */
+(function(){
+  const links=[...document.querySelectorAll('.toc a')];
+  const map=new Map(links.map(a=>[a.getAttribute('href').slice(1),a]));
+  const obs=new IntersectionObserver((ents)=>{
+    ents.forEach(e=>{
+      if(e.isIntersecting){
+        links.forEach(a=>a.classList.remove('on'));
+        const a=map.get(e.target.id);if(a)a.classList.add('on');
+      }
+    });
+  },{rootMargin:'-45% 0px -50% 0px',threshold:0});
+  document.querySelectorAll('.block[id]').forEach(s=>obs.observe(s));
+})();
+
+/* ——— form de lista de espera (demo, sin backend) ——— */
+(function(){
+  const form=document.getElementById('wlform');
+  const ok=document.getElementById('wlok');
+  if(!form) return;
+  form.addEventListener('submit',(ev)=>{
+    ev.preventDefault();
+    const email=document.getElementById('wlemail');
+    if(!email.value || !email.value.includes('@')){email.focus();email.style.borderColor='#e5484d';return;}
+    form.style.display='none';
+    ok.classList.add('show');
+  });
+})();
+
+/* ——— consentimiento de cookies (compartido con la landing) ——— */
+(function(){
+  const bar=document.getElementById('cookiebar');
+  if(!bar) return;
+  let v=null; try{v=localStorage.getItem('zl_cookie')}catch(e){}
+  if(v){bar.remove();return;}
+  requestAnimationFrame(()=>requestAnimationFrame(()=>bar.classList.remove('hide')));
+  const close=(val)=>{try{localStorage.setItem('zl_cookie',val)}catch(e){}bar.classList.add('hide');setTimeout(()=>bar.remove(),500);};
+  document.getElementById('ckEss').addEventListener('click',()=>close('essential'));
+  document.getElementById('ckAll').addEventListener('click',()=>close('all'));
+})();
+</script>
+</body>
+</html>
