@@ -781,7 +781,7 @@ const cinema=document.getElementById('cinema');
 const stage=cinema.querySelector('.stage');
 const acts=[...stage.querySelectorAll('.act')];
 const N=acts.length;
-const T_FADE=0.42;        // ancho del cross-dissolve (fracción de escena)
+const T_FADE=0.30;        // ancho del cross-dissolve (fracción de escena) — más corto = fundido más ágil
 
 // fondos + capas desde data-*
 // imágenes responsive: -sm (≈960px) en móvil/tablet, -lg (1376px recomprimido) en desktop.
@@ -834,7 +834,7 @@ function actVH(){return innerWidth<=720 ? 90 : (innerWidth<=1024 ? 112 : CONFIG.
 // pesos por escena: la del teléfono recibe MÁS recorrido de scroll para que el
 // carrusel de pantallas avance despacio (antes, un flick en móvil pasaba todas).
 function actWeights(){
-  const w=acts.map(a=>a.classList.contains('act-phone') ? (innerWidth<=820?2.6:2.0) : 1);
+  const w=acts.map(a=>a.classList.contains('act-phone') ? (innerWidth<=820?4.4:3.6) : 1);
   const c=[0]; w.forEach(x=>c.push(c[c.length-1]+x));
   return {w,c,total:c[N]};
 }
@@ -950,7 +950,9 @@ track.style.transition='none';                 // el scroll mueve el track direc
 function buildDots(){dotsBox.innerHTML='';slides.forEach((s,i)=>{const b=document.createElement('button');b.className=i===ci?'on':'';b.disabled=true;dotsBox.appendChild(b);});updLabel();}
 function updLabel(){const L=labels[lang]||labels.es;slabel.textContent=L[ci]||'';}
 // progreso 0..1 de la escena del teléfono → posición del carrusel; deslizá para avanzar de pantalla
-const CAR_FROM=0.10, CAR_TO=0.72;
+// el carrusel termina ANTES de que arranque el fundido (FADE_START=1-T_FADE=0.70),
+// y deja una pausa en la última pantalla para que "Patrones" no se pierda en la transición.
+const CAR_FROM=0.06, CAR_TO=0.60;
 function scrubCarousel(t){
   const last=slides.length-1;
   let p=(t-CAR_FROM)/(CAR_TO-CAR_FROM); p=p<0?0:p>1?1:p;
