@@ -4,7 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Zenloth — Centro de información</title>
-<meta name="description" content="Zenloth: lista de espera, acceso web, seguridad, sobre nosotros y términos. Bienestar financiero con la calma de Costa Rica.">
+<meta name="description" content="Zenloth: acceso web, seguridad, sobre nosotros y términos. Bienestar financiero con la calma de Costa Rica.">
 <meta name="theme-color" content="#04130C">
 <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Crect width='32' height='32' rx='8' fill='%2304130C'/%3E%3Cpath d='M8 23c0-8 6-13 16-14-1 10-7 14-13 14' fill='none' stroke='%2351D984' stroke-width='2.4' stroke-linecap='round'/%3E%3Cpath d='M9 22c3-4 8-6 12-7' fill='none' stroke='%2351D984' stroke-width='2.4' stroke-linecap='round'/%3E%3C/svg%3E">
 <!-- Tipografía de marca (brandbook): Space Grotesk para títulos · Manrope para cuerpo (solo pesos usados) -->
@@ -78,20 +78,6 @@ nav .navr{display:flex;align-items:center;gap:14px}
 .block ul li strong{color:var(--ink);font-weight:600}
 .block h3{font-size:18px;font-weight:600;color:var(--ink);margin:18px 0 8px}
 
-/* tarjeta destacada (lista de espera) */
-.feature-card{background:linear-gradient(160deg,var(--surf2),var(--surf));border:1px solid rgba(81,217,132,.28);border-radius:24px;padding:clamp(26px,4vw,40px);position:relative;overflow:hidden;box-shadow:0 30px 80px rgba(0,0,0,.35)}
-.feature-card::after{content:'';position:absolute;inset:0;border-radius:24px;background:linear-gradient(105deg,transparent 40%,rgba(81,217,132,.08) 50%,transparent 60%);background-size:200% 100%;animation:shimmer 5s linear infinite;pointer-events:none}
-@keyframes shimmer{0%{background-position:-200% 0}100%{background-position:200% 0}}
-.feature-card .pill{display:inline-flex;align-items:center;gap:7px;background:rgba(81,217,132,.14);border:1px solid rgba(81,217,132,.32);color:var(--esm);font-size:12.5px;font-weight:700;padding:6px 13px;border-radius:999px;margin-bottom:16px}
-.wlform{display:flex;gap:10px;flex-wrap:wrap;margin-top:22px;position:relative;z-index:2}
-.wlform input{flex:1;min-width:220px;background:rgba(0,0,0,.25);border:1px solid var(--bd);border-radius:999px;padding:14px 20px;color:var(--ink);font-size:15px;outline:none;transition:.2s}
-.wlform input:focus{border-color:var(--esm);box-shadow:0 0 0 3px rgba(81,217,132,.18)}
-.wlform input::placeholder{color:var(--mut)}
-.wlnote{color:var(--mut);font-size:13px;margin-top:14px;position:relative;z-index:2}
-.wlok{display:none;align-items:center;gap:10px;margin-top:22px;color:var(--esm);font-weight:600;font-size:16px;position:relative;z-index:2}
-.wlok.show{display:flex}
-.wlok i{font-size:24px}
-
 /* mini-cards (blog / contacto) */
 .mini-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:16px;margin-top:10px}
 .mini{background:var(--surf);border:1px solid var(--bd);border-radius:16px;padding:20px;transition:.25s var(--ease);text-decoration:none;display:block}
@@ -147,9 +133,9 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
 
 <!-- ═══════════════ NAV ═══════════════ -->
 <nav>
-  <a href="index.html"><img class="logo" src="src/logo/zenloth-lockup-white.png" alt="Zenloth"></a>
+  <a href="zenloth-cinematic.html"><img class="logo" src="src/logo/zenloth-lockup-white.png" alt="Zenloth"></a>
   <div class="navr">
-    <a class="back" href="index.html"><i class="ti ti-arrow-left"></i><span data-es="Volver al inicio" data-en="Back to home">Volver al inicio</span></a>
+    <a class="back" href="zenloth-cinematic.html"><i class="ti ti-arrow-left"></i><span data-es="Volver al inicio" data-en="Back to home">Volver al inicio</span></a>
     <button class="lang" id="lang">EN</button>
   </div>
 </nav>
@@ -159,13 +145,12 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
   <header class="dochero">
     <span class="eyebrow" data-es="Centro de información" data-en="Info center">Centro de información</span>
     <h1 data-es="Todo sobre <em>Zenloth</em>" data-en="Everything about <em>Zenloth</em>">Todo sobre <em>Zenloth</em></h1>
-    <p data-es="Quiénes somos, cómo cuidamos tu dinero y cómo sumarte antes de que abramos. Bienestar financiero con la calma de Costa Rica." data-en="Who we are, how we protect your money, and how to join before we open. Financial wellness with the calm of Costa Rica.">Quiénes somos, cómo cuidamos tu dinero y cómo sumarte antes de que abramos. Bienestar financiero con la calma de Costa Rica.</p>
+    <p data-es="Quiénes somos, cómo cuidamos tu dinero y cómo funciona Zenloth. Bienestar financiero con la calma de Costa Rica." data-en="Who we are, how we protect your money, and how Zenloth works. Financial wellness with the calm of Costa Rica.">Quiénes somos, cómo cuidamos tu dinero y cómo funciona Zenloth. Bienestar financiero con la calma de Costa Rica.</p>
   </header>
 
   <div class="doclayout">
     <!-- ——— TOC ——— -->
     <aside class="toc" id="toc">
-      <a href="#lista-de-espera"><i class="ti ti-clock-hour-4"></i><span data-es="Lista de espera" data-en="Waitlist">Lista de espera</span></a>
       <a href="#acceso-web"><i class="ti ti-world"></i><span data-es="Acceso web" data-en="Web app">Acceso web</span></a>
       <a href="#seguridad"><i class="ti ti-lock"></i><span data-es="Seguridad" data-en="Security">Seguridad</span></a>
       <a href="#sobre-nosotros"><i class="ti ti-leaf"></i><span data-es="Sobre nosotros" data-en="About">Sobre nosotros</span></a>
@@ -180,25 +165,10 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
     <!-- ——— CONTENIDO ——— -->
     <main class="doc">
 
-      <!-- LISTA DE ESPERA -->
-      <section class="block" id="lista-de-espera">
-        <div class="feature-card">
-          <span class="pill"><i class="ti ti-clock-hour-4"></i><span data-es="Estamos en pre-lanzamiento" data-en="We are in pre-launch">Estamos en pre-lanzamiento</span></span>
-          <h2 data-es="Sumate a la <em>lista de espera</em>" data-en="Join the <em>waitlist</em>">Sumate a la <em>lista de espera</em></h2>
-          <p data-es="Todavía no abrimos al público. Estamos afinando cada detalle para que tu primera experiencia con Zenloth sea impecable. Dejanos tu correo y serás de los primeros en entrar — con tu <strong>primer mes gratis garantizado</strong>." data-en="We are not open to the public yet. We are polishing every detail so your first experience with Zenloth is flawless. Leave your email and you will be among the first in — with your <strong>first month free guaranteed</strong>.">Todavía no abrimos al público. Estamos afinando cada detalle para que tu primera experiencia con Zenloth sea impecable. Dejanos tu correo y serás de los primeros en entrar — con tu <strong>primer mes gratis garantizado</strong>.</p>
-          <form class="wlform" id="wlform" novalidate>
-            <input type="email" id="wlemail" required placeholder="tucorreo@ejemplo.com" data-es-ph="tucorreo@ejemplo.com" data-en-ph="you@example.com" aria-label="Email">
-            <button type="submit" class="btn btn-esm"><span data-es="Sumarme" data-en="Join in">Sumarme</span><i class="ti ti-arrow-right"></i></button>
-          </form>
-          <div class="wlnote" data-es="Sin spam y sin compromiso — solo te escribimos cuando abramos." data-en="No spam, no commitment — we only write when we open.">Sin spam y sin compromiso — solo te escribimos cuando abramos.</div>
-          <div class="wlok" id="wlok"><i class="ti ti-circle-check"></i><span data-es="¡Listo! Te apartamos un lugar. Te avisaremos apenas abramos. 🌿" data-en="Done! We saved you a spot. We will let you know as soon as we open. 🌿">¡Listo! Te apartamos un lugar. Te avisaremos apenas abramos. 🌿</span></div>
-        </div>
-      </section>
-
       <!-- ACCESO WEB -->
       <section class="block" id="acceso-web">
         <div class="bh"><div class="bi"><i class="ti ti-world"></i></div><h2 data-es="Acceso web" data-en="Web app">Acceso web</h2></div>
-        <p data-es="Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Cuando lancemos, entrás desde cualquier navegador con tu cuenta y tus datos siempre sincronizados." data-en="Zenloth is a <strong>web app</strong>. You don't need to download anything from the App Store or Google Play. When we launch, you sign in from any browser with your account and your data always in sync.">Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Cuando lancemos, entrás desde cualquier navegador con tu cuenta y tus datos siempre sincronizados.</p>
+        <p data-es="Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Entrás desde cualquier navegador en zenloth.tech con tu cuenta y tus datos siempre sincronizados." data-en="Zenloth is a <strong>web app</strong>. You don't need to download anything from the App Store or Google Play. You sign in from any browser at zenloth.tech with your account and your data always in sync.">Zenloth es una <strong>aplicación web</strong>. No tenés que descargar nada de la App Store ni de Google Play. Entrás desde cualquier navegador en zenloth.tech con tu cuenta y tus datos siempre sincronizados.</p>
         <ul>
           <li><strong data-es="En cualquier dispositivo:" data-en="On any device:">En cualquier dispositivo:</strong> <span data-es="teléfono, tablet o computadora, con la misma experiencia." data-en="phone, tablet or computer, same experience.">teléfono, tablet o computadora, con la misma experiencia.</span></li>
           <li><strong data-es="Como app nativa:" data-en="Like a native app:">Como app nativa:</strong> <span data-es="agregala a tu pantalla de inicio (PWA) y se abre a pantalla completa." data-en="add it to your home screen (PWA) and it opens full-screen.">agregala a tu pantalla de inicio (PWA) y se abre a pantalla completa.</span></li>
@@ -217,7 +187,7 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
           <li><strong data-es="Nunca vendemos tus datos." data-en="We never sell your data.">Nunca vendemos tus datos.</strong> <span data-es="Nuestro negocio es tu suscripción, no tu información." data-en="Our business is your subscription, not your information.">Nuestro negocio es tu suscripción, no tu información.</span></li>
           <li><strong data-es="Vos mandás:" data-en="You're in control:">Vos mandás:</strong> <span data-es="podés exportar o borrar toda tu información cuando querás." data-en="export or delete all your information anytime.">podés exportar o borrar toda tu información cuando querás.</span></li>
         </ul>
-        <p data-es="Si encontrás algo que deberíamos revisar, escribinos a seguridad@zenloth.com. Respondemos en serio." data-en="If you find something we should review, write to security@zenloth.com. We take it seriously.">Si encontrás algo que deberíamos revisar, escribinos a seguridad@zenloth.com. Respondemos en serio.</p>
+        <p data-es="Si encontrás algo que deberíamos revisar, escribinos a nacho@zenloth.tech. Respondemos en serio." data-en="If you find something we should review, write to nacho@zenloth.tech. We take it seriously.">Si encontrás algo que deberíamos revisar, escribinos a nacho@zenloth.tech. Respondemos en serio.</p>
       </section>
 
       <!-- SOBRE NOSOTROS -->
@@ -236,9 +206,9 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
       <!-- COMUNIDAD -->
       <section class="block" id="comunidad">
         <div class="bh"><div class="bi"><i class="ti ti-users"></i></div><h2 data-es="Comunidad" data-en="Community">Comunidad</h2></div>
-        <p data-es="Estamos construyendo Zenloth junto a nuestra comunidad de pre-lanzamiento. Compartimos avances, escuchamos ideas y probamos funciones con quienes están en la lista de espera antes que nadie." data-en="We're building Zenloth alongside our pre-launch community. We share progress, listen to ideas, and test features with waitlist members before anyone else.">Estamos construyendo Zenloth junto a nuestra comunidad de pre-lanzamiento. Compartimos avances, escuchamos ideas y probamos funciones con quienes están en la lista de espera antes que nadie.</p>
+        <p data-es="Estamos construyendo Zenloth junto a nuestra comunidad. Compartimos avances, escuchamos ideas y mejoramos el producto con quienes ya lo usan." data-en="We're building Zenloth alongside our community. We share progress, listen to ideas, and improve the product with the people who already use it.">Estamos construyendo Zenloth junto a nuestra comunidad. Compartimos avances, escuchamos ideas y mejoramos el producto con quienes ya lo usan.</p>
         <div class="mini-grid">
-          <a class="mini" href="#lista-de-espera"><div class="tag" data-es="Acceso anticipado" data-en="Early access">Acceso anticipado</div><h3 data-es="Probá antes que nadie" data-en="Try it first">Probá antes que nadie</h3><p data-es="Los primeros de la lista entran a las pruebas privadas." data-en="The first on the list join private testing.">Los primeros de la lista entran a las pruebas privadas.</p></a>
+          <a class="mini" href="https://zenloth.tech" target="_blank" rel="noopener"><div class="tag" data-es="Probá Zenloth" data-en="Try Zenloth">Probá Zenloth</div><h3 data-es="Entrá a la app" data-en="Open the app">Entrá a la app</h3><p data-es="Zenloth vive en zenloth.tech — sin descargas, desde cualquier navegador." data-en="Zenloth lives at zenloth.tech — no downloads, from any browser.">Zenloth vive en zenloth.tech — sin descargas, desde cualquier navegador.</p></a>
           <a class="mini" href="#contacto"><div class="tag" data-es="Tu voz" data-en="Your voice">Tu voz</div><h3 data-es="Dale forma al producto" data-en="Shape the product">Dale forma al producto</h3><p data-es="Tus ideas se vuelven funciones reales. Contános qué necesitás." data-en="Your ideas become real features. Tell us what you need.">Tus ideas se vuelven funciones reales. Contános qué necesitás.</p></a>
           <a class="mini" href="#blog"><div class="tag">Newsletter</div><h3 data-es="Calma financiera, al correo" data-en="Financial calm, by email">Calma financiera, al correo</h3><p data-es="Consejos cortos sobre dinero, sin ansiedad ni jerga." data-en="Short money tips, no anxiety, no jargon.">Consejos cortos sobre dinero, sin ansiedad ni jerga.</p></a>
         </div>
@@ -259,9 +229,7 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
       <section class="block" id="contacto">
         <div class="bh"><div class="bi"><i class="ti ti-mail"></i></div><h2 data-es="Contacto" data-en="Contact">Contacto</h2></div>
         <p data-es="¿Dudas, ideas o ganas de saludar? Estamos en Costa Rica y respondemos en menos de 24 horas hábiles." data-en="Questions, ideas, or just want to say hi? We're in Costa Rica and reply within 24 business hours.">¿Dudas, ideas o ganas de saludar? Estamos en Costa Rica y respondemos en menos de 24 horas hábiles.</p>
-        <a class="contact-row" href="mailto:hola@zenloth.com"><i class="ti ti-mail"></i><div class="ct"><b>hola@zenloth.com</b><span data-es="Consultas generales" data-en="General questions">Consultas generales</span></div></a>
-        <a class="contact-row" href="mailto:soporte@zenloth.com"><i class="ti ti-lifebuoy"></i><div class="ct"><b>soporte@zenloth.com</b><span data-es="Ayuda y soporte" data-en="Help and support">Ayuda y soporte</span></div></a>
-        <a class="contact-row" href="mailto:prensa@zenloth.com"><i class="ti ti-microphone-2"></i><div class="ct"><b>prensa@zenloth.com</b><span data-es="Prensa y alianzas" data-en="Press and partnerships">Prensa y alianzas</span></div></a>
+        <a class="contact-row" href="mailto:nacho@zenloth.tech"><i class="ti ti-mail"></i><div class="ct"><b>nacho@zenloth.tech</b><span data-es="Consultas, soporte, prensa y alianzas" data-en="Questions, support, press and partnerships">Consultas, soporte, prensa y alianzas</span></div></a>
       </section>
 
       <!-- TERMINOS -->
@@ -287,7 +255,7 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
           <li><strong data-es="Control total:" data-en="Full control:">Control total:</strong> <span data-es="podés descargar o eliminar tu información cuando lo decidas." data-en="download or delete your information whenever you decide.">podés descargar o eliminar tu información cuando lo decidas.</span></li>
           <li><strong data-es="Alojamiento en Costa Rica" data-en="Hosted in Costa Rica">Alojamiento en Costa Rica</strong><span data-es=" con tus datos cifrados." data-en=" with your data encrypted."> con tus datos cifrados.</span></li>
         </ul>
-        <p class="legal-meta" data-es="Para ejercer tus derechos sobre tus datos: privacidad@zenloth.com." data-en="To exercise your data rights: privacy@zenloth.com.">Para ejercer tus derechos sobre tus datos: privacidad@zenloth.com.</p>
+        <p class="legal-meta" data-es="Para ejercer tus derechos sobre tus datos: nacho@zenloth.tech." data-en="To exercise your data rights: nacho@zenloth.tech.">Para ejercer tus derechos sobre tus datos: nacho@zenloth.tech.</p>
       </section>
 
       <!-- COOKIES -->
@@ -313,7 +281,7 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:64px 0 32px;pos
         <img class="logo" src="src/logo/zenloth-lockup-white.png" alt="Zenloth">
         <p class="fabout" data-es="Bienestar financiero con la calma de Costa Rica. Hecho para tu ritmo." data-en="Financial wellness with the calm of Costa Rica. Made for your pace.">Bienestar financiero con la calma de Costa Rica. Hecho para tu ritmo.</p>
       </div>
-      <div class="fcol"><h4 data-es="Producto" data-en="Product">Producto</h4><a href="index.html#features" data-es="Funciones" data-en="Features">Funciones</a><a href="index.html#pricing" data-es="Precios" data-en="Pricing">Precios</a><a href="#seguridad" data-es="Seguridad" data-en="Security">Seguridad</a><a href="#acceso-web" data-es="Acceso web" data-en="Web app">Acceso web</a></div>
+      <div class="fcol"><h4 data-es="Producto" data-en="Product">Producto</h4><a href="zenloth-cinematic.html#features" data-es="Funciones" data-en="Features">Funciones</a><a href="zenloth-cinematic.html#pricing" data-es="Precios" data-en="Pricing">Precios</a><a href="#seguridad" data-es="Seguridad" data-en="Security">Seguridad</a><a href="#acceso-web" data-es="Acceso web" data-en="Web app">Acceso web</a></div>
       <div class="fcol"><h4 data-es="Compañía" data-en="Company">Compañía</h4><a href="#sobre-nosotros" data-es="Sobre nosotros" data-en="About">Sobre nosotros</a><a href="#comunidad" data-es="Comunidad" data-en="Community">Comunidad</a><a href="#blog">Blog</a><a href="#contacto" data-es="Contacto" data-en="Contact">Contacto</a></div>
       <div class="fcol"><h4>Legal</h4><a href="#terminos" data-es="Términos" data-en="Terms">Términos</a><a href="#privacidad" data-es="Privacidad" data-en="Privacy">Privacidad</a><a href="#cookies">Cookies</a></div>
     </div>
@@ -360,20 +328,6 @@ setLang(lang);
     });
   },{rootMargin:'-45% 0px -50% 0px',threshold:0});
   document.querySelectorAll('.block[id]').forEach(s=>obs.observe(s));
-})();
-
-/* ——— form de lista de espera (demo, sin backend) ——— */
-(function(){
-  const form=document.getElementById('wlform');
-  const ok=document.getElementById('wlok');
-  if(!form) return;
-  form.addEventListener('submit',(ev)=>{
-    ev.preventDefault();
-    const email=document.getElementById('wlemail');
-    if(!email.value || !email.value.includes('@')){email.focus();email.style.borderColor='#e5484d';return;}
-    form.style.display='none';
-    ok.classList.add('show');
-  });
 })();
 
 /* ——— consentimiento de cookies (compartido con la landing) ——— */

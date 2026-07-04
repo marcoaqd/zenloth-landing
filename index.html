@@ -620,7 +620,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
       <div class="l-content">
         <span class="scene-tag"><i class="ti ti-sun"></i><span data-es="El destino" data-en="The destination">El destino</span></span>
         <h2 data-es="Ordená tu dinero.<br>Encontrá tu <em>calma</em>." data-en="Sort your money.<br>Find your <em>calm</em>.">Ordená tu dinero.<br>Encontrá tu <em>calma</em>.</h2>
-        <p class="sub" data-es="Imaginá respirar tranquilo con tus finanzas en orden. Estamos por abrir — sé de los primeros." data-en="Imagine breathing easy with your finances in order. We're about to open — be among the first.">Imaginá respirar tranquilo con tus finanzas en orden. Estamos por abrir — sé de los primeros.</p>
+        <p class="sub" data-es="Imaginá respirar tranquilo con tus finanzas en orden. Empezá hoy — tu primer mes es gratis." data-en="Imagine breathing easy with your finances in order. Start today — your first month is free.">Imaginá respirar tranquilo con tus finanzas en orden. Empezá hoy — tu primer mes es gratis.</p>
         <div class="cta">
           <a href="https://zenloth.tech" target="_blank" rel="noopener" class="btn btn-esm" data-es="Probá 1 mes gratis" data-en="Try 1 month free">Probá 1 mes gratis</a>
           <a href="#features" class="btn btn-ghost" data-es="Ver funciones" data-en="See features">Ver funciones</a>
@@ -831,13 +831,23 @@ if(transVid){
 
 // largo de scroll por escena, más corto en pantallas chicas (cine más ágil en móvil/tablet)
 function actVH(){return innerWidth<=720 ? 90 : (innerWidth<=1024 ? 112 : CONFIG.ACT_VH);}
-function setHeight(){cinema.style.height=(N*actVH())+'vh';}
+// pesos por escena: la del teléfono recibe MÁS recorrido de scroll para que el
+// carrusel de pantallas avance despacio (antes, un flick en móvil pasaba todas).
+function actWeights(){
+  const w=acts.map(a=>a.classList.contains('act-phone') ? (innerWidth<=820?2.6:2.0) : 1);
+  const c=[0]; w.forEach(x=>c.push(c[c.length-1]+x));
+  return {w,c,total:c[N]};
+}
+let AW=actWeights();
+function setHeight(){AW=actWeights();cinema.style.height=(AW.total*actVH())+'vh';}
 
 let target=0,cur=0;
 function measure(){
   const total=cinema.offsetHeight-innerHeight;
   const scrolled=Math.min(Math.max(-cinema.getBoundingClientRect().top,0),total);
-  target=total>0?(scrolled/total)*N:0;
+  const sw=total>0?(scrolled/total)*AW.total:0;      // posición en unidades de peso
+  let i=0; while(i<N-1&&sw>=AW.c[i+1]) i++;
+  target=i+(sw-AW.c[i])/AW.w[i];
 }
 
 function render(fp){
@@ -881,13 +891,52 @@ let lastActive=-1;
 function loop(){cur+=(target-cur)*0.13;if(Math.abs(target-cur)<1e-4)cur=target;render(cur);requestAnimationFrame(loop);}
 
 /* puntos laterales + navegación por escena */
-function jumpTo(i){const total=cinema.offsetHeight-innerHeight;const y=cinema.offsetTop+(i/N)*total+ (0.5/N)*total;scrollTo({top:y,behavior:'smooth'});}
+function jumpTo(i){const total=cinema.offsetHeight-innerHeight;const y=cinema.offsetTop+((AW.c[i]+0.5*AW.w[i])/AW.total)*total;scrollTo({top:y,behavior:'smooth'});}
 const prog=document.getElementById('progress');
 acts.forEach((a,i)=>{const b=document.createElement('button');b.title=a.dataset.name||('Escena '+(i+1));b.onclick=()=>jumpTo(i);prog.appendChild(b);});
 document.querySelectorAll('[data-go]').forEach(el=>el.addEventListener('click',e=>{e.preventDefault();jumpTo(parseInt(el.dataset.go));}));
 // los puntos de progreso solo se ven mientras estás dentro de la historia
 const progIO=new IntersectionObserver(es=>es.forEach(e=>{prog.style.opacity=e.isIntersecting?'1':'0';prog.style.pointerEvents=e.isIntersecting?'auto':'none';}),{threshold:0});
 progIO.observe(cinema);
+
+/* ——— aterrizaje suave: al soltar el scroll, la historia nunca queda a media transición.
+       Si parás en medio de una disolvencia, la escena retrocede o completa el cambio;
+       dentro del carrusel del teléfono, aterriza en la pantalla más cercana. ——— */
+const FADE_START=1-T_FADE;          // punto donde arranca el cross-dissolve hacia la escena siguiente
+function fpToY(fp){
+  const i=Math.min(N-1,Math.max(0,Math.floor(fp)));
+  const total=cinema.offsetHeight-innerHeight;
+  return cinema.offsetTop+((AW.c[i]+(fp-i)*AW.w[i])/AW.total)*total;
+}
+function settle(){
+  if(REDUCE||document.body.classList.contains('reduced'))return;
+  const fp=target;
+  if(fp<=0.08||fp>=N-0.12)return;   // en los bordes de la historia no intervenimos
+  const i=Math.min(N-1,Math.max(0,Math.floor(fp)));
+  const local=fp-i;
+  const isPhone=acts[i].classList.contains('act-phone');
+  let dest=null;
+  if(isPhone&&local>=CAR_FROM&&local<=CAR_TO+0.02){
+    // carrusel: nunca descansar a media pantalla de la app
+    const last=slides.length-1;
+    const pos=((local-CAR_FROM)/(CAR_TO-CAR_FROM))*last;
+    const near=Math.round(pos);
+    if(Math.abs(pos-near)>0.04) dest=i+CAR_FROM+(near/last)*(CAR_TO-CAR_FROM);
+  }else{
+    const zoneStart=isPhone?CAR_TO+0.02:FADE_START+0.02;
+    const stableEnd=isPhone?CAR_TO:FADE_START-0.03;
+    if(local>zoneStart){
+      const mid=(zoneStart+1)/2;
+      if(local<mid) dest=i+stableEnd;                 // retrocede a la escena actual
+      else if(i<N-1) dest=i+1+0.08;                   // completa el cambio a la siguiente
+    }
+  }
+  if(dest!=null&&Math.abs(dest-fp)>0.02) scrollTo({top:fpToY(dest),behavior:'smooth'});
+}
+let snapT=null,touching=false;
+addEventListener('touchstart',()=>{touching=true;clearTimeout(snapT);},{passive:true});
+addEventListener('touchend',()=>{touching=false;clearTimeout(snapT);snapT=setTimeout(settle,180);},{passive:true});
+addEventListener('scroll',()=>{if(touching)return;clearTimeout(snapT);snapT=setTimeout(settle,180);},{passive:true});
 
 /* ════════════════ CARRUSEL DEL TELÉFONO · controlado por el scroll ════════════════ */
 const track=document.getElementById('track');
