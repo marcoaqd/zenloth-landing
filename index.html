@@ -75,7 +75,7 @@ nav .logo{height:32px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
 .navlinks a:hover{color:#fff}
 .lang{background:rgba(255,255,255,.08);border:1px solid var(--bd);color:#fff;border-radius:999px;padding:7px 13px;font-size:13px;font-weight:700;cursor:pointer;font-family:inherit;transition:.2s}
 .lang:hover{background:rgba(255,255,255,.18)}
-.menu-btn{display:none;background:none;border:none;color:#fff;font-size:26px;cursor:pointer}
+.menu-btn{display:none;background:rgba(255,255,255,.08);border:1px solid var(--bd);color:#fff;font-size:13px;font-weight:700;cursor:pointer;border-radius:999px;padding:7px 13px;font-family:inherit;transition:.2s}.menu-btn:hover{background:rgba(255,255,255,.18)}
 
 /* ════════════════ CINEMA · compositor de escenas ════════════════ */
 .cinema{position:relative;width:100%}            /* altura la fija el JS (N · ACT_VH) */
@@ -355,6 +355,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
 .cookiebar.hide{opacity:0;transform:translateX(-50%) translateY(22px);pointer-events:none}
 .cookietext{display:flex;align-items:flex-start;gap:11px;color:var(--mut-2);font-size:13px;line-height:1.5;flex:1;min-width:240px}
 .cookietext i{color:var(--esm);font-size:20px;flex:none;margin-top:1px}
+.ck-mini{display:none}
 .cookiebtns{display:flex;align-items:center;gap:10px;flex-wrap:wrap}
 .btn-ck{font-family:'Manrope';font-weight:600;font-size:13px;border-radius:999px;padding:9px 16px;cursor:pointer;border:1px solid var(--bd);transition:.2s}
 .btn-ck.ghost{background:transparent;color:var(--ink)}.btn-ck.ghost:hover{background:rgba(255,255,255,.08)}
@@ -368,7 +369,19 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
   .fcard.lg .fi{margin-bottom:14px}
   .fcard.lg h3{margin-top:14px}
 }
-@media(max-width:560px){.cookiebar{flex-direction:column;align-items:stretch}.cookiebtns{justify-content:flex-end}}
+@media(max-width:560px){
+  .cookiebar{left:0;right:0;width:100%;transform:none;bottom:0;border-radius:16px 16px 0 0;
+    padding:13px 16px max(18px, env(safe-area-inset-bottom,0px));gap:11px;flex-direction:column;align-items:stretch}
+  .cookiebar.hide{transform:translateY(100%);opacity:0}
+  .ck-full{display:none}.ck-mini{display:inline}
+  .cookietext{font-size:12.5px;line-height:1.4;min-width:unset;gap:9px}
+  .cookietext i{font-size:17px}
+  .cookiebtns{display:flex;gap:9px}
+  .btn-ck{flex:1;text-align:center;justify-content:center;padding:11px 10px;font-size:13.5px}
+  .cklink{display:none}
+  /* hero: la foto es horizontal; en móvil reencuadramos para centrar a la persona */
+  .act-hero .l-bg{background-position:30% 50%}
+}
 </style>
 </head>
 <body>
@@ -412,7 +425,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
         <h1 data-es='No estás perdido.<br>Solo necesitabas el <em>mapa</em>.' data-en="You're not lost.<br>You just needed the <em>map</em>.">No estás perdido.<br>Solo necesitabas el <em>mapa</em>.</h1>
         <p class="sub" data-es="Zenloth te muestra dónde estás, hacia dónde vas y tu siguiente paso — con la calma de la selva costarricense." data-en="Zenloth shows you where you are, where you're headed and your next step — with the calm of the Costa Rican rainforest.">Zenloth te muestra dónde estás, hacia dónde vas y tu siguiente paso — con la calma de la selva costarricense.</p>
         <div class="cta">
-          <a href="#pricing" class="btn btn-w" data-es="Probá 1 mes gratis" data-en="Try 1 month free">Probá 1 mes gratis</a>
+          <a href="https://zenloth.tech" target="_blank" rel="noopener" class="btn btn-w" data-es="Probá 1 mes gratis" data-en="Try 1 month free">Probá 1 mes gratis</a>
           <a data-go="1" class="btn btn-ghost" data-es="Ver el camino" data-en="See the path">Ver el camino</a>
         </div>
       </div>
@@ -609,7 +622,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
         <h2 data-es="Ordená tu dinero.<br>Encontrá tu <em>calma</em>." data-en="Sort your money.<br>Find your <em>calm</em>.">Ordená tu dinero.<br>Encontrá tu <em>calma</em>.</h2>
         <p class="sub" data-es="Imaginá respirar tranquilo con tus finanzas en orden. Estamos por abrir — sé de los primeros." data-en="Imagine breathing easy with your finances in order. We're about to open — be among the first.">Imaginá respirar tranquilo con tus finanzas en orden. Estamos por abrir — sé de los primeros.</p>
         <div class="cta">
-          <a href="#pricing" class="btn btn-esm" data-es="Probá 1 mes gratis" data-en="Try 1 month free">Probá 1 mes gratis</a>
+          <a href="https://zenloth.tech" target="_blank" rel="noopener" class="btn btn-esm" data-es="Probá 1 mes gratis" data-en="Try 1 month free">Probá 1 mes gratis</a>
           <a href="#features" class="btn btn-ghost" data-es="Ver funciones" data-en="See features">Ver funciones</a>
         </div>
       </div>
@@ -674,7 +687,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
           <li><i class="ti ti-check"></i><span data-es="Coach Zenny con IA" data-en="AI Zenny coach">Coach Zenny con IA</span></li>
           <li><i class="ti ti-check"></i><span data-es="Colones y dólares en un solo lugar" data-en="Colones &amp; dollars in one place">Colones y dólares en un solo lugar</span></li>
         </ul>
-        <a href="info.html#lista-de-espera" class="btn btn-ghost" data-es="Empezar mi mes gratis" data-en="Start my free month">Empezar mi mes gratis</a>
+        <a href="https://zenloth.tech" target="_blank" rel="noopener" class="btn btn-ghost" data-es="Empezar mi mes gratis" data-en="Start my free month">Empezar mi mes gratis</a>
         <div class="pguar"><i class="ti ti-shield-check"></i><span data-es="Sin tarjeta para la prueba · cancelás cuando querás" data-en="No card for the trial · cancel anytime">Sin tarjeta para la prueba · cancelás cuando querás</span></div>
       </div>
       <div class="pcard feat">
@@ -689,7 +702,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
           <li><i class="ti ti-check"></i><span data-es="Reportes avanzados y exportación" data-en="Advanced reports &amp; export">Reportes avanzados y exportación</span></li>
           <li><i class="ti ti-check"></i><span data-es="Soporte prioritario" data-en="Priority support">Soporte prioritario</span></li>
         </ul>
-        <a href="info.html#lista-de-espera" class="btn btn-esm" data-es="Empezar mi mes gratis" data-en="Start my free month">Empezar mi mes gratis</a>
+        <a href="https://zenloth.tech" target="_blank" rel="noopener" class="btn btn-esm" data-es="Empezar mi mes gratis" data-en="Start my free month">Empezar mi mes gratis</a>
         <div class="pguar"><i class="ti ti-shield-check"></i><span data-es="Sin tarjeta para la prueba · cancelás cuando querás" data-en="No card for the trial · cancel anytime">Sin tarjeta para la prueba · cancelás cuando querás</span></div>
       </div>
     </div>
@@ -717,7 +730,7 @@ body.reduced .act-phone .l-bg{filter:blur(14px) brightness(.5)}
 
 <!-- ═══════════════ COOKIES ═══════════════ -->
 <div class="cookiebar hide" id="cookiebar" role="dialog" aria-label="Cookies">
-  <div class="cookietext"><i class="ti ti-cookie"></i><span data-es="Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario." data-en="We use essential cookies to run the site and, only if you accept, minimal anonymous analytics to improve. No ad tracking.">Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario.</span></div>
+  <div class="cookietext"><i class="ti ti-cookie"></i><span class="ck-full" data-es="Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario." data-en="We use essential cookies to run the site and, only if you accept, minimal anonymous analytics to improve. No ad tracking.">Usamos cookies esenciales para que el sitio funcione y, solo si aceptás, un mínimo de analítica anónima para mejorar. Nada de rastreo publicitario.</span><span class="ck-mini" data-es="Usamos cookies esenciales y analítica anónima. Sin rastreo publicitario." data-en="We use essential cookies and anonymous analytics. No ad tracking.">Usamos cookies esenciales y analítica anónima. Sin rastreo publicitario.</span></div>
   <div class="cookiebtns">
     <button class="btn-ck ghost" id="ckEss" data-es="Solo esenciales" data-en="Essentials only">Solo esenciales</button>
     <button class="btn-ck ok" id="ckAll" data-es="Aceptar todo" data-en="Accept all">Aceptar todo</button>
