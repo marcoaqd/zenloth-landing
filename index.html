@@ -117,7 +117,7 @@ nav .logo{height:32px;filter:drop-shadow(0 2px 8px rgba(0,0,0,.5))}
 @media(max-width:820px){.progress{display:none}}
 
 /* ════════════════ ACTO 3 · TELÉFONO + CARRUSEL (réplica de la app real) ════════════════ */
-.cine-phone{width:clamp(248px,78vw,290px);background:#EDF2EE;border-radius:42px;border:1px solid rgba(0,0,0,.05);overflow:hidden;box-shadow:0 50px 110px rgba(0,0,0,.6),0 0 0 9px #0c100e,0 0 0 10px rgba(255,255,255,.06);position:relative;will-change:transform;margin-top:14px}
+.cine-phone{width:clamp(242px,72vw,262px);flex-shrink:0;background:#EDF2EE;border-radius:42px;border:1px solid rgba(0,0,0,.05);overflow:hidden;box-shadow:0 50px 110px rgba(0,0,0,.6),0 0 0 9px #0c100e,0 0 0 10px rgba(255,255,255,.06);position:relative;will-change:transform;margin-top:14px}
 .cine-phone::before{content:'';position:absolute;top:9px;left:50%;transform:translateX(-50%);width:86px;height:7px;background:#0a0a0a;border-radius:6px;z-index:8}
 .screens{overflow:hidden;position:relative}
 .screen-track{display:flex;width:100%;will-change:transform}
@@ -338,6 +338,12 @@ footer{background:#030d08;border-top:1px solid var(--bd);padding:70px 0 34px;pos
   .fcard.lg{grid-column:auto;grid-row:auto}
   .fcard.lg h3{margin-top:14px}
   .zenny-wrap{flex-direction:column}
+}
+/* escena del teléfono en móvil: menos padding vertical para que el mockup
+   quepa entero (con la barra de Safari) sin encogerse ni verse cuadrado */
+@media(max-width:820px){
+  .act-phone .l-content{padding-top:62px;padding-bottom:26px}
+  .act-phone .scene-tag{margin-bottom:14px}
 }
 
 /* ——— reduced motion: la historia se vuelve una serie de escenas estáticas ——— */
